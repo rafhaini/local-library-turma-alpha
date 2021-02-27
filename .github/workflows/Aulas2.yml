@@ -15,8 +15,8 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: upload artifact
-      - uses: actions/upload-artifact@v2.2.2
+        uses: actions/upload-artifact@v2.2.2
         with:
-          name: $NAME_ARTIFACT
+          name: ${{env.NAME_ARTIFACT}}
           path: .
     
