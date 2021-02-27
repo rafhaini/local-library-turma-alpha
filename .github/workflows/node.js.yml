@@ -5,9 +5,9 @@ name: Node.js Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches: [ smain ]
   pull_request:
-    branches: [ main ]
+    branches: [ smain ]
     
 
 jobs:
