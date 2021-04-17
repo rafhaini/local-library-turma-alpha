@@ -20,6 +20,19 @@ jobs:
     - run: npm run build --if-present
     - run: npm test --if-present
     
+    - name: Cache SonarCloud packages
+      uses: actions/cache@v1
+      with:
+        path: ~/.sonar/cache
+        key: ${{ runner.os }}-sonar
+        restore-keys: ${{ runner.os }}-sonar
+
+    - name: Build and analyze
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: ./mvnw verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+    
   linter:
     name: Lint code base
     runs-on: ubuntu-latest
