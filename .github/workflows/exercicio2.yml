@@ -2,7 +2,7 @@ name: Exercicio 2
 
 on:
   push:
-    branches: [ no-branch ]
+    branches: [ xxxx ]
     
     
 jobs:
