@@ -61,7 +61,7 @@ jobs:
       DB_URI: $${{ secrets.DB_URI }}
       NODE_ENV: homologacao
       
-    needs: [build, sonarcloud]
+    needs: [build, sonarcloud, linter]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
