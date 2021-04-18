@@ -2,7 +2,7 @@ name: Exercicio 2
 
 on:
   push:
-    branches: [main]
+    branches: [xxxx]
     
     
 jobs:
