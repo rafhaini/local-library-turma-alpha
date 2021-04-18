@@ -56,11 +56,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         
   deploy-homolog:
-    runs-on: ubuntu-latest
-    env:
-      DB_URI: $${{ secrets.DB_URI }}
-      NODE_ENV: homologacao
-      
+    runs-on: ubuntu-latest  
     needs: [build, sonarcloud, linter]
     steps:
       - name: Checkout Code
@@ -73,17 +69,6 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.10.9 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: pedrolacerda-local-library
-          heroku_email: pedrohrl1@gmail.com
-          justlogin: true
-      
-      - name: Set Heroku remote
-        run: heroku git:remote -a pedrolacerda-local-library
-      
-      - name: Set env variables
-        run: |
-          heroku config:set NODE_ENV=${{ env.NODE_ENV }}
-          heroku config:set MONGODB_URI=${{ env.DB_URI }}
-      
-      - name: Push code to Heroku
-        run: git push heroku main
+          heroku_app_name: projeto-final1
+          heroku_email: rafhainiveronezi@gmail.com
+          remote_branch: "main"
