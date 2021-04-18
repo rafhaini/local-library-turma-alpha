@@ -2,7 +2,7 @@ name: Mult OS Jobs
 
 on:
   push:
-    branches: [main]
+    branches: [xxxx]
     
 jobs:
   multi-os:
