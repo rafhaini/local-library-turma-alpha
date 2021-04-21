@@ -58,7 +58,7 @@ jobs:
   deploy-homolog:
     runs-on: ubuntu-latest
     env:
-      NODE_ENV: production
+      NODE_ENV: homolog
     needs: [build, sonarcloud, linter]
     steps:
       - uses: actions/checkout@v2
