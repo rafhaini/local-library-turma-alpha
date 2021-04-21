@@ -56,7 +56,9 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         
   deploy-homolog:
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: production
     needs: [build, sonarcloud, linter]
     steps:
       - uses: actions/checkout@v2
@@ -65,3 +67,13 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: projeto-final1 #Must be unique in Heroku
           heroku_email: rafhainiveronezi@gmail.com
+          
+      - name: Set Heroku remote
+        run: heroku git:remote -a projeto-final1
+      
+      - name: Set env variables
+        run: |
+          heroku config:set NODE_ENV=${{ env.NODE_ENV }}
+      
+      - name: Push code to Heroku
+        run: git push heroku main
