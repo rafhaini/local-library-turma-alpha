@@ -4,6 +4,8 @@ on:
   push:
     branches: [ main ]
     
+env:
+  APP_NAME: projeto-final1
 
 jobs:
   build:
@@ -65,11 +67,11 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: projeto-final1 #Must be unique in Heroku
+          heroku_app_name: ${{ env.APP_NAME }}
           heroku_email: rafhainiveronezi@gmail.com
           
       - name: Set Heroku remote
-        run: heroku git:remote -a projeto-final1
+        run: heroku git:remote -a  ${{ env.APP_NAME }}
       
       - name: Set env variables
         run: |
