@@ -3,9 +3,6 @@ name: Projeto Final
 on:
   push:
     branches: [ main ]
-    
-env:
-  APP_NAME: projeto-final1
 
 jobs:
   build:
@@ -60,6 +57,7 @@ jobs:
   deploy-homolog:
     runs-on: ubuntu-latest
     env:
+      APP_NAME: projeto-final1
       NODE_ENV_HOMOLOG: homolog
     needs: [build, sonarcloud, linter]
     steps:
@@ -83,6 +81,7 @@ jobs:
   deploy-prod:
     runs-on: ubuntu-latest
     env:
+      APP_NAME: projeto-final1-prod
       NODE_ENV: production
     needs: [deploy-homolog]
     steps:
