@@ -79,3 +79,26 @@ jobs:
       
       - name: Push code to Heroku
         run: git push heroku main
+        
+  deploy-prod:
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: production
+    needs: [deploy-homolog]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{ env.APP_NAME }}
+          heroku_email: rafhainiveronezi@gmail.com
+          
+      - name: Set Heroku remote
+        run: heroku git:remote -a  ${{ env.APP_NAME }}
+      
+      - name: Set env variables
+        run: |
+          heroku config:set NODE_ENV=${{ env.NODE_ENV }}
+      
+      - name: Push code to Heroku
+        run: git push heroku main
